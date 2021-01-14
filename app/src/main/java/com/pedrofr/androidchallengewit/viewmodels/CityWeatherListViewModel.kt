@@ -1,25 +1,23 @@
 package com.pedrofr.androidchallengewit.viewmodels
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
+import androidx.lifecycle.liveData
 import com.pedrofr.androidchallengewit.database.model.City
+import com.pedrofr.androidchallengewit.repository.Repository
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 
-class CityWeatherListViewModel: ViewModel() {
+class CityWeatherListViewModel @ViewModelInject constructor(
+    private val repository: Repository
+): ViewModel() {
 
     private val cities = MutableLiveData<List<City>>()
 
-    fun fetchCities() {
-        val json = context.
-        val citiesJson = resources.openRawResource(R.raw.players).bufferedReader().use {
-            it.readText()
-        }
-        val moshi: Moshi = Moshi.Builder().build()
-        val adapter: JsonAdapter<City> = moshi.adapter(City::class.java)
-        val city = adapter.fromJson(moviesJson))
-
-    }
+    //TODO see if we need to call viewModelScope here. For now I'll just remove the suspend call
+    fun fetchCities() = repository.fetchCities().asLiveData()
 
 
 }
