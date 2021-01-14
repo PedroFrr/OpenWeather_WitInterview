@@ -9,6 +9,7 @@ import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import com.pedrofr.androidchallengewit.database.dao.CityDao
 import com.pedrofr.androidchallengewit.database.dao.WeatherDao
+import com.pedrofr.androidchallengewit.database.model.City
 import com.pedrofr.androidchallengewit.database.model.Weather
 import com.pedrofr.androidchallengewit.utils.DATABASE_NAME
 import com.pedrofr.androidchallengewit.workers.CitiesDatabaseWorker
@@ -16,7 +17,7 @@ import com.pedrofr.androidchallengewit.workers.CitiesDatabaseWorker
 /**
  * SQLite Database for storing the logs.
  */
-@Database(entities = [Weather::class], version = 1, exportSchema = false)
+@Database(entities = [Weather::class, City::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun weatherDao(): WeatherDao
     abstract fun cityDao(): CityDao

@@ -26,6 +26,11 @@ class CitiesDatabaseWorker(context: Context, workerParams: WorkerParameters) :
 //            val adapter: JsonAdapter<City> = moshi.adapter(City::class.java)
 //            val movieList: List<City> = adapter.fromJson(jsonString) //TODO see if there's a need to handle this warning
 
+//            String cardsJsonResponse = ...;
+//            Type type = Types.newParameterizedType(List.class, Card.class);
+//            JsonAdapter<List<Card>> adapter = moshi.adapter(type);
+//            List<Card> cards = adapter.fromJson(cardsJsonResponse);
+
             applicationContext.assets.open(CITIES_DATA_JSON_FILENAME).use { inputStream ->
                 JsonReader(inputStream.reader()).use { jsonReader ->
                     val cityType = object : TypeToken<List<City>>() {}.type

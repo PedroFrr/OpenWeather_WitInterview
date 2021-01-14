@@ -8,7 +8,10 @@ import com.pedrofr.androidchallengewit.R
 import com.pedrofr.androidchallengewit.databinding.FragmentCityListBinding
 import com.pedrofr.androidchallengewit.utils.viewBinding
 import com.pedrofr.androidchallengewit.viewmodels.CityWeatherListViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import toast
 
+@AndroidEntryPoint
 class CityWeatherListFragment : Fragment(R.layout.fragment_city_list) {
 
     private val binding by viewBinding(FragmentCityListBinding::bind)
@@ -24,6 +27,7 @@ class CityWeatherListFragment : Fragment(R.layout.fragment_city_list) {
     private fun initObservables(){
         cityWeatherListViewModel.fetchCities().observe(viewLifecycleOwner) {
             //TODO submit list to adapter
+            toast("Cities succsffly retrieved")
         }
     }
 

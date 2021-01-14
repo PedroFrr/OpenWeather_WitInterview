@@ -17,6 +17,7 @@ class CityWeatherListViewModel @ViewModelInject constructor(
     private val cities = MutableLiveData<List<City>>()
 
     //TODO see if we need to call viewModelScope here. For now I'll just remove the suspend call
+    //TODO see if we need to add a Loading status
     fun fetchCities() = repository.fetchCities().asLiveData()
 
 
