@@ -11,6 +11,8 @@ buildscript {
         moshiVersion = "2.7.1"
         retrofitVersion = '2.9.0'
         okhttpLoggingVersion = '4.8.1'
+        workVersion = '2.4.0'
+        gsonVersion = '2.8.6'
     }
     repositories {
         google()
