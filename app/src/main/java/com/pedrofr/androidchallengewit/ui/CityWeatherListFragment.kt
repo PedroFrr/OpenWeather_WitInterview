@@ -15,23 +15,30 @@ import toast
 class CityWeatherListFragment : Fragment(R.layout.fragment_city_list) {
 
     private val binding by viewBinding(FragmentCityListBinding::bind)
-
     private val cityWeatherListViewModel by viewModels<CityWeatherListViewModel>()
+    private val citiesAdapter by lazy { CityListAdapter()}
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initUi()
         initObservables()
     }
 
-    private fun initObservables(){
-        cityWeatherListViewModel.fetchCities().observe(viewLifecycleOwner) {
-            //TODO submit list to adapter
-            toast("Cities succsffly retrieved")
+    private fun initUi() {
+
+        binding.citiesRecyclerView.apply {
+            adapter = citiesAdapter
+            hasFixedSize()
         }
+
     }
 
-
+    private fun initObservables() {
+        cityWeatherListViewModel.fetchCities().observe(viewLifecycleOwner) { cities ->
+            citiesAdapter.submitList(cities)
+        }
+    }
 
 
 }
