@@ -1,5 +1,7 @@
 package com.pedrofr.androidchallengewit.di
 
+import com.pedrofr.androidchallengewit.networking.mapper.ApiMapper
+import com.pedrofr.androidchallengewit.networking.mapper.ApiMapperImpl
 import com.pedrofr.androidchallengewit.repository.Repository
 import com.pedrofr.androidchallengewit.repository.RepositoryImpl
 import dagger.Binds
@@ -15,4 +17,9 @@ abstract class RepositoryModule {
     abstract fun providesRepository(
         impl: RepositoryImpl
     ) : Repository
+
+//    @Binds
+//    abstract fun providesApiMapper(
+//        impl: ApiMapperImpl
+//    ) : ApiMapper
 }

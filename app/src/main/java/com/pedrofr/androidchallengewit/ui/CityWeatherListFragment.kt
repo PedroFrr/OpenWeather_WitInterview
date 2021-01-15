@@ -9,7 +9,6 @@ import com.pedrofr.androidchallengewit.databinding.FragmentCityListBinding
 import com.pedrofr.androidchallengewit.utils.viewBinding
 import com.pedrofr.androidchallengewit.viewmodels.CityWeatherListViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import toast
 
 @AndroidEntryPoint
 class CityWeatherListFragment : Fragment(R.layout.fragment_city_list) {
@@ -39,6 +38,7 @@ class CityWeatherListFragment : Fragment(R.layout.fragment_city_list) {
             citiesAdapter.submitList(cities)
         }
     }
+
 
 
 }

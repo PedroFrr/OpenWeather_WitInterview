@@ -1,11 +1,17 @@
 package com.pedrofr.androidchallengewit.database.dao
 
 import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.pedrofr.androidchallengewit.database.model.City
+import com.pedrofr.androidchallengewit.database.model.Weather
 
 @Dao
 interface WeatherDao {
 
-    //TODO set queries to retrieve weather detail. We'll use offline first
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertWeatherDetail(weather: Weather)
+
 
 }

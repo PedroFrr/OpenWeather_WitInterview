@@ -1,12 +1,13 @@
 package com.pedrofr.androidchallengewit.ui
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.pedrofr.androidchallengewit.database.model.City
-import com.pedrofr.androidchallengewit.databinding.FragmentCityListBinding
 import com.pedrofr.androidchallengewit.databinding.ItemCityBinding
 
 class CityListAdapter() : ListAdapter<City, CityListAdapter.ViewHolder>(CityListDiffCallBack()) {
@@ -21,7 +22,9 @@ class CityListAdapter() : ListAdapter<City, CityListAdapter.ViewHolder>(CityList
     }
 
     //TODO add view binding
-    class ViewHolder private constructor(private val binding: ItemCityBinding) : RecyclerView.ViewHolder(binding.root){
+    class ViewHolder private constructor(
+        private val binding: ItemCityBinding
+     ) : RecyclerView.ViewHolder(binding.root){
         companion object {
             fun from(parent: ViewGroup): ViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
@@ -30,13 +33,21 @@ class CityListAdapter() : ListAdapter<City, CityListAdapter.ViewHolder>(CityList
             }
         }
 
+        //TODO maybe explore if it's need to change this reference operator here
         fun bind(item: City){
-            //TODO set actions for each layout attribute, including the onClickListener
-//            with(itemView) {
-//                binding.citiesRecyclerView.
-//            }
-            binding.cityName.text = item.name
+            with(binding) {
+                cityName.text = item.name
+                cityInfo.setOnClickListener { view ->
+                    navigateCityWeatherDetail(view, item.id)
+                }
+            }
 
+        }
+
+        //TODO validate if I should passe a function here or use it directly
+        private fun navigateCityWeatherDetail(view: View, cityId: Long){
+            val direction = CityWeatherListFragmentDirections.cityListToWeatherDetail(cityId)
+            view.findNavController().navigate(direction)
         }
     }
 }

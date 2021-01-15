@@ -9,5 +9,18 @@
         android:id="@+id/cityWeatherListFragment"
         android:name="com.pedrofr.androidchallengewit.ui.CityWeatherListFragment"
         android:label="fragment_city_list"
-        tools:layout="@layout/fragment_city_list" />
+        tools:layout="@layout/fragment_city_list" >
+        <action
+            android:id="@+id/cityListToWeatherDetail"
+            app:destination="@id/cityWeatherDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/cityWeatherDetailFragment"
+        android:name="com.pedrofr.androidchallengewit.ui.CityWeatherDetailFragment"
+        android:label="fragment_city_weather_detail"
+        tools:layout="@layout/fragment_city_weather_detail" >
+        <argument
+            android:name="cityId"
+            app:argType="long" />
+    </fragment>
 </navigation>

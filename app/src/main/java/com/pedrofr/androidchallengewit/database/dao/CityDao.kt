@@ -11,8 +11,12 @@ import kotlinx.coroutines.flow.Flow
 interface CityDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAll(plants: List<City>)
+    suspend fun insertAll(cities: List<City>)
 
+    //TODO for now this is not suspend, refactor to suspend
     @Query("SELECT * FROM cities")
     fun fetchCities(): Flow<List<City>>
+
+    @Query("SELECT * FROM cities WHERE id = :cityId")
+    suspend fun fetchCity(cityId: Long): City
 }

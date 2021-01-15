@@ -2,6 +2,7 @@ package com.pedrofr.androidchallengewit.di
 
 import com.pedrofr.androidchallengewit.networking.OpenWeatherClient
 import com.pedrofr.androidchallengewit.networking.OpenWeatherService
+import com.pedrofr.androidchallengewit.networking.mapper.ApiMapper
 import com.pedrofr.androidchallengewit.utils.BASE_URL
 import dagger.Module
 import dagger.Provides
@@ -45,4 +46,6 @@ object NetworkingModule {
     @Provides
     @Singleton
     fun provideOpenWeatherClient(openWeatherService: OpenWeatherService) = OpenWeatherClient(openWeatherService)
+
+
 }

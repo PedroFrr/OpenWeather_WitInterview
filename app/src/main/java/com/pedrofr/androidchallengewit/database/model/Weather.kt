@@ -7,4 +7,11 @@ import java.util.*
 @Entity(tableName = "weather")
 data class Weather(
     @PrimaryKey val id: String = UUID.randomUUID().toString(),
-    val temperature: Int)
+    val main: String,
+    val description: String,
+    val icon: String,
+    val actualTemperature: Double,
+    val minTemperature: Double,
+    val maxTemperature: Double,
+    val humidity: Int
+)
