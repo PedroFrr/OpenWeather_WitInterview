@@ -1,16 +1,26 @@
 package com.pedrofr.androidchallengewit.ui
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.os.Bundle
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
+import android.os.Looper
+import android.util.Log
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import android.view.Menu
-import android.view.MenuItem
+import androidx.core.app.ActivityCompat
+import com.google.android.gms.location.*
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.pedrofr.androidchallengewit.R
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
+
+    private lateinit var locationRequest: LocationRequest
+
+    private lateinit var locationCallback: LocationCallback
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme) //Set AppTheme back once MainActivity is created
@@ -18,6 +28,69 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+        setLocationRequest()
+
+        locationCallback = object : LocationCallback() {
+            override fun onLocationResult(locationResult: LocationResult?) {
+                locationResult ?: return
+                for (location in locationResult.locations){
+                    // Update UI with location data
+                    // ...
+                    Log.i("DEBUG", "donee granted")
+                }
+                stopLocationUpdates()
+            }
+        }
+
+
+        findViewById<FloatingActionButton>(R.id.fab).setOnClickListener { view ->
+            requestPermission.launch(Manifest.permission.ACCESS_FINE_LOCATION)
+
+        }
+
     }
 
+    private fun startLocationUpdates() {
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+        ) {
+            fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper())
+
+
+        } else {
+            requestPermission.launch(Manifest.permission.ACCESS_FINE_LOCATION)
+        }
+
+
+    }
+
+    private val requestPermission =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
+            // Do something if permission granted
+            if (isGranted) {
+                startLocationUpdates()
+
+                Log.i("DEBUG", "permission granted")
+            } else {
+                Log.i("DEBUG", "permission denied")
+            }
+        }
+
+    private fun stopLocationUpdates() {
+        fusedLocationClient.removeLocationUpdates(locationCallback)
+    }
+
+    private fun setLocationRequest(){
+        locationRequest = LocationRequest.create().apply {
+            interval = 10000
+            fastestInterval = 5000
+            priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+        }
+    }
+
+
+
 }
+
+
+
