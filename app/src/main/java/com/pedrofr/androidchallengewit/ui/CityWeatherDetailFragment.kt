@@ -23,6 +23,7 @@ class CityWeatherDetailFragment : Fragment(R.layout.fragment_city_weather_detail
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+//        cityWeatherDetailViewModel.fetchLocationCurrentWeather(35.0, -139.0) //TODO Delete
         initUi()
         initObservables()
     }
@@ -54,6 +55,22 @@ class CityWeatherDetailFragment : Fragment(R.layout.fragment_city_weather_detail
             }
 
         }
+
+        //TODO DELETE.....
+//        cityWeatherDetailViewModel.getWeatherLocation().observe(viewLifecycleOwner) { result ->
+//            when (result) {
+//                is Loading -> {
+//                    //TODO Loading status
+//                    toast("LOADINGGGGG")
+//                }
+//                is Success -> toast("THis is ${result.data.mainResponse.temp}")
+//                is Failure -> {
+//                    //TODO Failure status
+//                    toast("Failleed")
+//                }
+//            }
+//
+//        }
 
     }
 

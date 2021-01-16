@@ -34,11 +34,10 @@ class MainActivity : AppCompatActivity() {
         locationCallback = object : LocationCallback() {
             override fun onLocationResult(locationResult: LocationResult?) {
                 locationResult ?: return
-                for (location in locationResult.locations){
-                    // Update UI with location data
-                    // ...
-                    Log.i("DEBUG", "donee granted")
-                }
+                //TODO use this location when the user clicks on the item to know its current location weather
+                Log.i("DEBUG", "LAST LOCATION: ${locationResult.lastLocation}")
+
+                //After retrieving current location stop location updates as we don't need to keep track of it
                 stopLocationUpdates()
             }
         }

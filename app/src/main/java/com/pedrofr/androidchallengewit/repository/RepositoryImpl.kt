@@ -26,10 +26,23 @@ class RepositoryImpl @Inject constructor(
         return flow {
             emit(Loading)
 
-            //TODO refactor
+            //TODO refactor as we still need a failure
             val results = openWeatherClient.fetchCityCurrentWeather(cityId)
             if(results is Success){
                 emit(Success(results.data))
+            }
+        }
+    }
+
+    override suspend fun fetchLocationCurrentWeather(latitude: Double, longitude: Double): Flow<Result<GetWeatherResponse>> {
+        return flow {
+
+            //TODO refactor as we never get a Loading status
+            val results = openWeatherClient.fetchLocationCurrentWeather(latitude, longitude)
+            when(results){
+                is Success -> emit(Success(results.data))
+                is Failure -> emit (Failure(results.error))
+                is Loading -> emit(Loading)
             }
         }
     }

@@ -11,5 +11,6 @@ interface Repository {
     fun fetchCities(): Flow<List<City>>
     suspend fun fetchCity(cityId: Long): City
     suspend fun fetchCityCurrentWeather(cityId: Long): Flow<Result<GetWeatherResponse>>
+    suspend fun fetchLocationCurrentWeather(latitude: Double, longitude: Double): Flow<Result<GetWeatherResponse>>
 
 }

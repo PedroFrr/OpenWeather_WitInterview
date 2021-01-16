@@ -15,4 +15,13 @@ class OpenWeatherClient @Inject constructor(
         } catch (error: Throwable) {
             Failure(error)
         }
+
+    //TODO should we handle Loading here??????????????
+    suspend fun fetchLocationCurrentWeather(latitude: Double, longitude: Double) =
+        try {
+            val response = openWeatherService.fetchLocationCurrentWeather(latitude = latitude, longitude = longitude)
+            Success(response)
+        } catch (error: Throwable) {
+            Failure(error)
+        }
 }

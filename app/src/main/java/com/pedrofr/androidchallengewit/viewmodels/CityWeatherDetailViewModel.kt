@@ -22,13 +22,8 @@ class CityWeatherDetailViewModel @ViewModelInject constructor(
     private val _weather = MutableLiveData<Result<GetWeatherResponse>>()
     fun getWeather(): LiveData<Result<GetWeatherResponse>> = _weather
 
-    //TODO see how to refactor this
-    fun fetchCity(cityId: Long) {
-        viewModelScope.launch {
-            val result = repository.fetchCity(cityId)
-            _city.value = result
-        }
-    }
+//    private val _weatherLocation = MutableLiveData<Result<GetWeatherResponse>>()
+//    fun getWeatherLocation(): LiveData<Result<GetWeatherResponse>> = _weatherLocation
 
     fun fetchCityCurrentWeather(cityId: Long) {
         viewModelScope.launch {
@@ -38,6 +33,16 @@ class CityWeatherDetailViewModel @ViewModelInject constructor(
                 }
         }
     }
+
+    //TODO Deleteeee
+//    fun fetchLocationCurrentWeather(latitude: Double, longitude: Double){
+//        viewModelScope.launch {
+//            repository.fetchLocationCurrentWeather(latitude, longitude)
+//                .collect {
+//                    _weatherLocation.postValue(it)
+//                }
+//        }
+//    }
 
 
 }
