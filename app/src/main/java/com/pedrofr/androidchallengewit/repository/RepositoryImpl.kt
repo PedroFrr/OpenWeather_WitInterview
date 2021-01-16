@@ -13,23 +13,25 @@ import javax.inject.Inject
 class RepositoryImpl @Inject constructor(
     private val cityDao: CityDao,
     private val weatherDao: WeatherDao,
-    private val openWeatherClient: OpenWeatherClient
+    private val openWeatherClient: OpenWeatherClient,
+    private val apiMapper: ApiMapper //TODO dependecy injection
 ) : Repository {
 
     //TODO DONT forget to write the info on the DB after obtaining it (Offline first!!)
     override fun fetchCities(): Flow<List<City>> = cityDao.fetchCities()
 
-    override suspend fun fetchCity(cityId: Long): City = cityDao.fetchCity(cityId)
+    override suspend fun fetchCityInfo(cityId: Long): City = cityDao.fetchCity(cityId)
 
     //TODO Refactor see if we should instead use Weather db model
-    override suspend fun fetchCityCurrentWeather(cityId: Long): Flow<Result<GetWeatherResponse>> {
+    override suspend fun fetchCityCurrentWeather(cityId: Long): Flow<Result<Weather>> {
         return flow {
             emit(Loading)
 
             //TODO refactor as we still need a failure
             val results = openWeatherClient.fetchCityCurrentWeather(cityId)
             if(results is Success){
-                emit(Success(results.data))
+                val weatherDomain = apiMapper.mapApiWeatherToDomain(results.data) //Maps API response into Domain response
+                emit(Success(weatherDomain))
             }
         }
     }
@@ -46,6 +48,8 @@ class RepositoryImpl @Inject constructor(
             }
         }
     }
+
+    override fun fetchCitiesByName(cityName: String): Flow<List<City>> = cityDao.fetchCitiesByName(cityName) //TODO if there's time refactor to have LOADING
 
 
 }

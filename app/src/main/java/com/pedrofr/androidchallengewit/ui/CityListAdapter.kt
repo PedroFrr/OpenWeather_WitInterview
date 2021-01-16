@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.pedrofr.androidchallengewit.database.model.City
-import com.pedrofr.androidchallengewit.databinding.ItemCityBinding
+import com.pedrofr.androidchallengewit.databinding.ListItemCityBinding
 
 class CityListAdapter() : ListAdapter<City, CityListAdapter.ViewHolder>(CityListDiffCallBack()) {
 
@@ -23,12 +23,12 @@ class CityListAdapter() : ListAdapter<City, CityListAdapter.ViewHolder>(CityList
 
     //TODO add view binding
     class ViewHolder private constructor(
-        private val binding: ItemCityBinding
+        private val binding: ListItemCityBinding
      ) : RecyclerView.ViewHolder(binding.root){
         companion object {
             fun from(parent: ViewGroup): ViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
-                val binding = ItemCityBinding.inflate(layoutInflater, parent, false)
+                val binding = ListItemCityBinding.inflate(layoutInflater, parent, false)
                 return ViewHolder(binding)
             }
         }

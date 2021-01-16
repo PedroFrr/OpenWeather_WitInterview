@@ -14,9 +14,12 @@ interface CityDao {
     suspend fun insertAll(cities: List<City>)
 
     //TODO for now this is not suspend, refactor to suspend
-    @Query("SELECT * FROM cities")
+    @Query("SELECT * FROM cities ORDER BY name")
     fun fetchCities(): Flow<List<City>>
 
     @Query("SELECT * FROM cities WHERE id = :cityId")
     suspend fun fetchCity(cityId: Long): City
+
+    @Query("SELECT * FROM cities WHERE name LIKE '%' || :cityName || '%' OR :cityName = '' ORDER BY name")
+    fun fetchCitiesByName(cityName: String): Flow<List<City>>
 }

@@ -1,24 +1,65 @@
 package com.pedrofr.androidchallengewit.viewmodels
 
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
-import androidx.lifecycle.liveData
+import androidx.lifecycle.*
 import com.pedrofr.androidchallengewit.database.model.City
 import com.pedrofr.androidchallengewit.repository.Repository
-import com.squareup.moshi.JsonAdapter
-import com.squareup.moshi.Moshi
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 class CityWeatherListViewModel @ViewModelInject constructor(
     private val repository: Repository
-): ViewModel() {
+) : ViewModel() {
 
-    private val cities = MutableLiveData<List<City>>()
+    private val debouncePeriod: Long = 250
+    private var searchJob: Job? = null
+    private var _searchCitiesLiveData: LiveData<List<City>>
+    fun getCitiesByName() = _searchCitiesLiveData
+    private val _searchFieldTextLiveData = MutableLiveData<String>()
+    val citiesMediatorLiveData = MediatorLiveData<List<City>>() //TODO refactor see if we can make it private
 
-    //TODO see if we need to call viewModelScope here. For now I'll just remove the suspend call
-    //TODO see if we need to add a Loading status
-    fun fetchCities() = repository.fetchCities().asLiveData()
+
+    init {
+
+        _searchCitiesLiveData = _searchFieldTextLiveData.switchMap {
+            fetchCitiesByName(it) //the body of a switchMap expects a LiveData //TODO remove comment
+        }
+
+        //MediatorLiveData to
+        citiesMediatorLiveData.addSource(repository.fetchCities().asLiveData()) {
+            citiesMediatorLiveData.value = it
+        }
+
+    }
+
+    fun onSearchQuery(query: String) {
+        searchJob?.cancel()
+        searchJob = viewModelScope.launch {
+            delay(debouncePeriod)
+            _searchFieldTextLiveData.value = query
+        }
+    }
+
+    //TODO refactor see if there are other ways to do this
+    private fun fetchCitiesByName(query: String): LiveData<List<City>> {
+        val liveData = MutableLiveData<List<City>>()
+        viewModelScope.launch {
+            if (query.isBlank()) {
+                repository.fetchCities()
+                    .collect {
+                        liveData.postValue(it)
+                    }
+            }else{
+                repository.fetchCitiesByName(query)
+                    .collect {
+                        liveData.postValue(it)
+                    }
+            }
+        }
+        return liveData
+    }
 
 
 }

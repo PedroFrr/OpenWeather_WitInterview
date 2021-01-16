@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.pedrofr.androidchallengewit.database.model.City
 import com.pedrofr.androidchallengewit.database.model.Result
-import com.pedrofr.androidchallengewit.database.model.response.GetWeatherResponse
+import com.pedrofr.androidchallengewit.database.model.Weather
 import com.pedrofr.androidchallengewit.repository.Repository
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -19,11 +19,11 @@ class CityWeatherDetailViewModel @ViewModelInject constructor(
     private val _city = MutableLiveData<City>()
     fun getCity(): LiveData<City> = _city
 
-    private val _weather = MutableLiveData<Result<GetWeatherResponse>>()
-    fun getWeather(): LiveData<Result<GetWeatherResponse>> = _weather
+    private val _weather = MutableLiveData<Result<Weather>>()
+    fun getWeather(): LiveData<Result<Weather>> = _weather
 
 //    private val _weatherLocation = MutableLiveData<Result<GetWeatherResponse>>()
-//    fun getWeatherLocation(): LiveData<Result<GetWeatherResponse>> = _weatherLocation
+//    fun getWeatherLocation(): LiveData< Result<GetWeatherResponse>> = _weatherLocation
 
     fun fetchCityCurrentWeather(cityId: Long) {
         viewModelScope.launch {
@@ -31,6 +31,13 @@ class CityWeatherDetailViewModel @ViewModelInject constructor(
                 .collect {
                     _weather.postValue(it)
                 }
+        }
+    }
+
+    fun fetchCityInfo(cityId: Long){
+        viewModelScope.launch {
+            val cityInfo = repository.fetchCityInfo(cityId)
+            _city.postValue(cityInfo)
         }
     }
 

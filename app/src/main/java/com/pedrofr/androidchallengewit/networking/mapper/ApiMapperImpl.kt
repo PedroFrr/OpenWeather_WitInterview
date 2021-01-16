@@ -3,8 +3,9 @@ package com.pedrofr.androidchallengewit.networking.mapper
 import com.pedrofr.androidchallengewit.database.model.Weather
 import com.pedrofr.androidchallengewit.database.model.response.GetWeatherResponse
 import com.pedrofr.androidchallengewit.database.model.response.WeatherResponse
+import javax.inject.Inject
 
-class ApiMapperImpl : ApiMapper {
+class ApiMapperImpl @Inject constructor() : ApiMapper {
 
     //TODO refactor the List<WeatherResponse> mapping
     override fun mapApiWeatherToDomain(apiWeather: GetWeatherResponse): Weather = with(apiWeather) {

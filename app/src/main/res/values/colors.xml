@@ -5,5 +5,7 @@
     <color name="colorAccent">#63a4ff</color>
     <color name="lightGray">#888888</color>
     <color name="white">#FFFFFF</color>
+    <color name="colorWhiteCard">@color/cardview_light_background</color>
+    <color name="icon_tint">@color/white</color>
 
 </resources>

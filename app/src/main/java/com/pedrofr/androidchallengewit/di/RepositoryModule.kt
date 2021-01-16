@@ -18,8 +18,8 @@ abstract class RepositoryModule {
         impl: RepositoryImpl
     ) : Repository
 
-//    @Binds
-//    abstract fun providesApiMapper(
-//        impl: ApiMapperImpl
-//    ) : ApiMapper
+    @Binds
+    abstract fun providesApiMapper(
+        impl: ApiMapperImpl
+    ) : ApiMapper
 }
