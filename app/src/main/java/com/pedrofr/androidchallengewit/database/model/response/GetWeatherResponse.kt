@@ -11,4 +11,5 @@ data class GetWeatherResponse(
     @Json(name = "wind") val windResponse: WindResponse,
     @Json(name = "id") val cityId: Long,
     @Json(name = "name") val cityName: String,
+    @Json(name = "dt") val timestamp: Long
 )

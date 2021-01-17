@@ -6,9 +6,11 @@
     <dimen name="card_corner_radius">12dp</dimen>
     <dimen name="padding_half">8dp</dimen>
     <dimen name="padding_standard">16dp</dimen>
+    <dimen name="padding_big">24dp</dimen>
     <dimen name="list_item_city_height">100dp</dimen>
+    <dimen name="list_item_weather_icon_height">120dp</dimen>
     <dimen name="city_name_text_size">20sp</dimen>
-    <dimen name="current_weather_name_text_size">50sp</dimen>
+    <dimen name="current_weather_text_size">85sp</dimen>
     <dimen name="list_item_with_divider_height">132dp</dimen>
     <dimen name="small_text_size">12sp</dimen>
 
@@ -18,4 +20,6 @@
     <dimen name="dimen_16dp">16dp</dimen>
     <dimen name="dimen_80dp">80dp</dimen>
     <dimen name="dimen_100dp">100dp</dimen>
+    <dimen name="current_day_week_text_size">35sp</dimen>
+    <dimen name="current_day_text_size">50sp</dimen>
 </resources>

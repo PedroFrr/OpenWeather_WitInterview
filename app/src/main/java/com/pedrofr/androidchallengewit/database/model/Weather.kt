@@ -10,10 +10,11 @@ data class Weather(
     val main: String,
     val description: String,
     val icon: String,
-    val actualTemperature: Double,
-    val minTemperature: Double,
-    val maxTemperature: Double,
+    val actualTemperature: Int,
+    val minTemperature: Int,
+    val maxTemperature: Int,
     val humidity: Int,
     val cityId: Long,
-    val cityName: String
+    val cityName: String,
+    val timestamp: Long
 )

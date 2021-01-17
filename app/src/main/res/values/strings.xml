@@ -6,6 +6,9 @@
     <string name="previous">Previous</string>
     <string name="search_cities">Search cities</string>
     <string name="current_location">Current Location</string>
+    <string name="error_info_message">Something went wrong</string>
+    <string name="temperature_percentage">%1$d º</string>
+    <string name="humidity_level">%1$d %%</string>
 
 
 </resources>

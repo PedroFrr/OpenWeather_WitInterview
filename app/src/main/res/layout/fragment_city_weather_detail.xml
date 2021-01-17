@@ -36,23 +36,21 @@
 
             <TextView
                 android:id="@+id/temperature"
+                style="@style/CurrentTemperature"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/padding_half"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/current_weather_name_text_size"
+                android:layout_marginStart="@dimen/padding_standard"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBaseline_toBaselineOf="@id/currentDayOfMonth"
                 tools:text="85º" />
 
             <TextView
                 android:id="@+id/weatherDescription"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/padding_standard"
-                android:textAllCaps="true"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/small_text_size"
+                android:layout_marginStart="@dimen/padding_big"
+                style="@style/CityWeatherInfo"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/temperature"
                 tools:text="cloudy" />
@@ -61,11 +59,8 @@
                 android:id="@+id/cityName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/padding_standard"
-                android:layout_marginTop="@dimen/padding_half"
-                android:textAllCaps="true"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/small_text_size"
+                android:layout_marginStart="@dimen/padding_big"
+                style="@style/CityWeatherInfo"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/weatherDescription"
                 tools:text="lisbon" />
@@ -79,10 +74,11 @@
 
             <ImageView
                 android:id="@+id/weatherIcon"
-                android:layout_width="@dimen/list_item_city_height"
-                android:layout_height="@dimen/list_item_city_height"
+                android:layout_width="@dimen/list_item_weather_icon_height"
+                android:layout_height="@dimen/list_item_weather_icon_height"
                 app:layout_constraintEnd_toStartOf="@id/secondGuideline"
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@id/firstGuideline"
                 tools:srcCompat="@drawable/ic_baseline_wb_cloudy_24" />
 
             <androidx.constraintlayout.widget.Guideline
@@ -90,33 +86,46 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.60" />
+                app:layout_constraintGuide_percent="0.70" />
 
             <!--TODO refactor maybe move everything to style-->
+
             <com.google.android.material.chip.Chip
                 android:id="@+id/humidityLevel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:enabled="false"
-                android:textAppearance="@style/chipTextAppearance"
-                android:textColor="@color/white"
-                app:chipBackgroundColor="@color/colorAccent"
+                style="@style/chipTextAppearance"
                 app:chipIcon="@drawable/ic_baseline_invert_colors_24"
                 app:chipIconTint="@color/icon_tint"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.538"
                 app:layout_constraintStart_toStartOf="@id/secondGuideline"
                 app:layout_constraintTop_toTopOf="parent"
+
                 tools:text="65%" />
 
             <TextView
-                android:id="@+id/currentDay"
+                android:id="@+id/currentDayOfMonth"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/current_weather_name_text_size"
+                android:textSize="@dimen/current_day_text_size"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@id/secondGuideline"
                 app:layout_constraintTop_toBottomOf="@id/humidityLevel"
                 tools:text="30" />
+
+            <TextView
+                android:id="@+id/currentDayOfWeek"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/current_day_week_text_size"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/secondGuideline"
+                app:layout_constraintTop_toBottomOf="@id/currentDayOfMonth"
+                app:layout_constraintBaseline_toBaselineOf="@id/weatherDescription"
+                tools:text="MON" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

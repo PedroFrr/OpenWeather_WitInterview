@@ -22,7 +22,7 @@ class CityWeatherListViewModel @ViewModelInject constructor(
 
     init {
 
-        //every time the search field changes we reexecute the query
+        //every time the search field changes we re-execute the query
         _searchCitiesLiveData = _searchFieldTextLiveData.switchMap {
             fetchCitiesByName(it)
         }

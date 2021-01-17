@@ -13,12 +13,13 @@ class ApiMapperImpl @Inject constructor() : ApiMapper {
             main = weatherResponse.first().main,
             description = weatherResponse.first().description,
             icon = weatherResponse.first().icon,
-            actualTemperature = mainResponse.temp,
-            minTemperature = mainResponse.tempMin,
-            maxTemperature = mainResponse.tempMax,
+            actualTemperature = mainResponse.temp.toInt(), //Conversion to int as we don't want to show decimals
+            minTemperature = mainResponse.tempMin.toInt(),
+            maxTemperature = mainResponse.tempMax.toInt(),
             humidity = mainResponse.humidity,
             cityId = cityId,
-            cityName = cityName
+            cityName = cityName,
+            timestamp = timestamp
         )
     }
 
