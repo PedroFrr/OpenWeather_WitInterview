@@ -1,0 +1,82 @@
+[
+  {
+    "id": 2267057,
+    "name": "Lisbon",
+    "state": "",
+    "country": "PT",
+    "lon": -9.13333,
+    "lat": 38.716671
+  },
+  {
+    "id": 3117735,
+    "name": "Madrid",
+    "state": "",
+    "country": "ES",
+    "lon": -3.70256,
+    "lat": 40.4165
+  },
+  {
+    "id": 2988506,
+    "name": "Paris",
+    "state": "",
+    "country": "FR",
+    "lon": 2.34864,
+    "lat": 48.85339
+  },
+  {
+    "id": 2950158,
+    "name": "Berlin",
+    "state": "",
+    "country": "DE",
+    "lon": 10.45,
+    "lat": 54.033329
+  },
+  {
+    "id": 2618425,
+    "name": "Copenhagen",
+    "state": "",
+    "country": "DK",
+    "lon": 12.56553,
+    "lat": 55.675941
+  },
+  {
+    "id": 3169070,
+    "name": "Rome",
+    "state": "",
+    "country": "IT",
+    "lon": 12.4839,
+    "lat": 41.894741
+  },
+  {
+    "id": 2643743,
+    "name": "London",
+    "state": "",
+    "country": "GB",
+    "lon": -0.12574,
+    "lat": 51.50853
+  },
+  {
+    "id": 2964574,
+    "name": "Dublin",
+    "state": "",
+    "country": "IE",
+    "lon": -6.26719,
+    "lat": 53.34399
+  },
+  {
+    "id": 3067696,
+    "name": "Prague",
+    "state": "",
+    "country": "CZ",
+    "lon": 14.42076,
+    "lat": 50.088039
+  },
+  {
+    "id": 2761369,
+    "name": "Vienna",
+    "state": "",
+    "country": "AT",
+    "lon": 16.37208,
+    "lat": 48.208488
+  }
+]
