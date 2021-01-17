@@ -21,6 +21,7 @@
         tools:layout="@layout/fragment_city_weather_detail" >
         <argument
             android:name="cityId"
-            app:argType="long" />
+            app:argType="long"
+            android:defaultValue="0L" />
     </fragment>
 </navigation>

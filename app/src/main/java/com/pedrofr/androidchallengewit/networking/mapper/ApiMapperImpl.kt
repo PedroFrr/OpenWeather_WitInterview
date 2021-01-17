@@ -16,7 +16,9 @@ class ApiMapperImpl @Inject constructor() : ApiMapper {
             actualTemperature = mainResponse.temp,
             minTemperature = mainResponse.tempMin,
             maxTemperature = mainResponse.tempMax,
-            humidity = mainResponse.humidity
+            humidity = mainResponse.humidity,
+            cityId = cityId,
+            cityName = cityName
         )
     }
 

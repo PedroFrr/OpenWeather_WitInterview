@@ -12,44 +12,46 @@ import javax.inject.Inject
 
 class RepositoryImpl @Inject constructor(
     private val cityDao: CityDao,
-    private val weatherDao: WeatherDao,
+    private val weatherDao: WeatherDao, //TODO see if needed, if not delete
     private val openWeatherClient: OpenWeatherClient,
-    private val apiMapper: ApiMapper //TODO dependecy injection
+    private val apiMapper: ApiMapper
 ) : Repository {
 
-    //TODO DONT forget to write the info on the DB after obtaining it (Offline first!!)
     override fun fetchCities(): Flow<List<City>> = cityDao.fetchCities()
 
     override suspend fun fetchCityInfo(cityId: Long): City = cityDao.fetchCity(cityId)
 
-    //TODO Refactor see if we should instead use Weather db model
     override suspend fun fetchCityCurrentWeather(cityId: Long): Flow<Result<Weather>> {
         return flow {
             emit(Loading)
-
-            //TODO refactor as we still need a failure
             val results = openWeatherClient.fetchCityCurrentWeather(cityId)
-            if(results is Success){
-                val weatherDomain = apiMapper.mapApiWeatherToDomain(results.data) //Maps API response into Domain response
+            if (results is Success) {
+                val weatherDomain =
+                    apiMapper.mapApiWeatherToDomain(results.data) //Maps API response into Domain response
                 emit(Success(weatherDomain))
+            } else if (results is Failure) {
+                emit(Failure(results.error))
             }
         }
     }
 
-    override suspend fun fetchLocationCurrentWeather(latitude: Double, longitude: Double): Flow<Result<GetWeatherResponse>> {
+    override suspend fun fetchLocationCurrentWeather(
+        latitude: Double,
+        longitude: Double
+    ): Flow<Result<Weather>> {
         return flow {
-
-            //TODO refactor as we never get a Loading status
+            emit(Loading)
             val results = openWeatherClient.fetchLocationCurrentWeather(latitude, longitude)
-            when(results){
-                is Success -> emit(Success(results.data))
-                is Failure -> emit (Failure(results.error))
-                is Loading -> emit(Loading)
+            if (results is Success) {
+                val weatherDomain = apiMapper.mapApiWeatherToDomain(results.data)
+                emit(Success(weatherDomain))
+
+            } else if (results is Failure) {
+                emit(Failure(results.error))
             }
         }
     }
 
-    override fun fetchCitiesByName(cityName: String): Flow<List<City>> = cityDao.fetchCitiesByName(cityName) //TODO if there's time refactor to have LOADING
-
+    override fun fetchCitiesByName(cityName: String): Flow<List<City>> = cityDao.fetchCitiesByName(cityName)
 
 }

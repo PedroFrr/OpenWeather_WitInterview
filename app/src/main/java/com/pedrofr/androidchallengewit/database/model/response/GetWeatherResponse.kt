@@ -8,5 +8,7 @@ import com.squareup.moshi.JsonClass
 data class GetWeatherResponse(
     @Json(name = "main") val mainResponse: MainResponse,
     @Json(name = "weather") val weatherResponse: List<WeatherResponse>,
-    @Json(name = "wind") val windResponse: WindResponse
+    @Json(name = "wind") val windResponse: WindResponse,
+    @Json(name = "id") val cityId: Long,
+    @Json(name = "name") val cityName: String,
 )

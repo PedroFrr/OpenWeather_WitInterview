@@ -44,7 +44,6 @@ class CityListAdapter() : ListAdapter<City, CityListAdapter.ViewHolder>(CityList
 
         }
 
-        //TODO validate if I should passe a function here or use it directly
         private fun navigateCityWeatherDetail(view: View, cityId: Long){
             val direction = CityWeatherListFragmentDirections.cityListToWeatherDetail(cityId)
             view.findNavController().navigate(direction)

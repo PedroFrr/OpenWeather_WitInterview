@@ -1,6 +1,9 @@
+import android.app.Activity
 import android.content.Context
+import android.content.pm.PackageManager
 import android.view.View
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 
 fun Fragment.toast(message: String, length: Int = Toast.LENGTH_SHORT) {
@@ -10,6 +13,16 @@ fun Fragment.toast(message: String, length: Int = Toast.LENGTH_SHORT) {
 fun Context.toast(message: String, length: Int = Toast.LENGTH_SHORT) {
     Toast.makeText(this, message, length).show()
 }
+
+fun Fragment.hasPermission(permission: String): Boolean {
+    return ActivityCompat.checkSelfPermission(
+        context!!, //TODO refactor non null assertion
+        permission
+    ) == PackageManager.PERMISSION_GRANTED
+}
+
+
+
 
 /**
  * Helper functions for the View layer of the app.
@@ -25,3 +38,4 @@ fun View.gone() {
 fun View.invisible() {
     visibility = View.INVISIBLE
 }
+

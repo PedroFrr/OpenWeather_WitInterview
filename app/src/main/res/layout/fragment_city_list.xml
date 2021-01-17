@@ -18,6 +18,30 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/currentLocationCardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@color/colorWhiteCard"
+        android:foreground="?attr/selectableItemBackground"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/searchEditText"
+        app:cardBackgroundColor="@color/colorWhiteCard"
+        app:cardCornerRadius="14dp"
+        app:cardElevation="4dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/current_location"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/city_name_text_size"
+            android:textStyle="bold"
+            android:layout_marginStart="@dimen/padding_standard"/>
+    </com.google.android.material.card.MaterialCardView>
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/citiesRecyclerView"
@@ -26,7 +50,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/searchEditText"
+        app:layout_constraintTop_toBottomOf="@id/currentLocationCardView"
         tools:itemCount="10"
         tools:listitem="@layout/list_item_city" />
 

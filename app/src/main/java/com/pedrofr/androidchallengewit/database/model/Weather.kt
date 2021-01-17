@@ -13,5 +13,7 @@ data class Weather(
     val actualTemperature: Double,
     val minTemperature: Double,
     val maxTemperature: Double,
-    val humidity: Int
+    val humidity: Int,
+    val cityId: Long,
+    val cityName: String
 )

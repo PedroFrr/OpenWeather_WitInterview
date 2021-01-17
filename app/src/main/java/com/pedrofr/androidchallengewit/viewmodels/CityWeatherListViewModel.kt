@@ -17,19 +17,14 @@ class CityWeatherListViewModel @ViewModelInject constructor(
     private var searchJob: Job? = null
     private var _searchCitiesLiveData: LiveData<List<City>>
     fun getCitiesByName() = _searchCitiesLiveData
-    private val _searchFieldTextLiveData = MutableLiveData<String>()
-    val citiesMediatorLiveData = MediatorLiveData<List<City>>() //TODO refactor see if we can make it private
+    private val _searchFieldTextLiveData = MutableLiveData<String>("")
 
 
     init {
 
+        //every time the search field changes we reexecute the query
         _searchCitiesLiveData = _searchFieldTextLiveData.switchMap {
-            fetchCitiesByName(it) //the body of a switchMap expects a LiveData //TODO remove comment
-        }
-
-        //MediatorLiveData to
-        citiesMediatorLiveData.addSource(repository.fetchCities().asLiveData()) {
-            citiesMediatorLiveData.value = it
+            fetchCitiesByName(it)
         }
 
     }

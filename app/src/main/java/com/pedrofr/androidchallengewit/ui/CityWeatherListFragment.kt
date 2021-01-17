@@ -1,10 +1,14 @@
 package com.pedrofr.androidchallengewit.ui
 
+import android.Manifest
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pedrofr.androidchallengewit.R
@@ -43,17 +47,27 @@ class CityWeatherListFragment : Fragment(R.layout.fragment_city_list) {
             cityWeatherListViewModel.onSearchQuery(text.toString())
         }
 
+        //TODO if time, this should go into a BaseItem for the adapter so we can have all the cards inside the RecyclerView
+        binding.currentLocationCardView.setOnClickListener {
+            requestPermission.launch(Manifest.permission.ACCESS_FINE_LOCATION) //ask for user permissions runtime in order to access his position and then get his current location weather
+        }
+
     }
 
     private fun initObservables() {
         cityWeatherListViewModel.getCitiesByName().observe(viewLifecycleOwner) { cities ->
             citiesAdapter.submitList(cities)
         }
-
-        cityWeatherListViewModel.citiesMediatorLiveData.observe(viewLifecycleOwner) { cities ->
-            citiesAdapter.submitList(cities)
-        }
     }
 
+    private val requestPermission =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
+            if (isGranted) {
+                view?.findNavController()?.navigate(R.id.cityListToWeatherDetail)
+                Log.i("DEBUG", "permission granted")
+            } else {
+                Log.i("DEBUG", "permission denied")
+            }
+        }
 
 }

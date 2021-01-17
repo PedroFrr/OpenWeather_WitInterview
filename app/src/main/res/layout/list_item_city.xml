@@ -15,14 +15,14 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cityInfo"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/list_item_with_divider_height">
+        android:layout_height="@dimen/list_item_with_divider_height"
+        android:layout_marginStart="@dimen/padding_standard">
 
 <!--        TODO add content description-->
         <ImageView
             android:id="@+id/cityImage"
             android:layout_width="@dimen/list_item_city_height"
             android:layout_height="@dimen/list_item_city_height"
-            android:layout_marginStart="@dimen/padding_standard"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -42,7 +42,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/cityImage"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_chainStyle="packed"
             tools:text="Lisbon" />
 
 
