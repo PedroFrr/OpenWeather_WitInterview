@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.pedrofr.androidchallengewit.R
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -52,5 +53,6 @@ fun Long.unixTimestampToDayOfMonth(): String {
     return outputDateFormat.format(calendar.time)
 
 }
+
 
 

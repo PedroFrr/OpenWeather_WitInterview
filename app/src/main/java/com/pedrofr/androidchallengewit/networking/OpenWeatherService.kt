@@ -14,7 +14,6 @@ interface OpenWeatherService {
         @Query("id") cityId: Long
     ): GetWeatherResponse
 
-    //TODO maybe add some parameters to exclude so the call doesn't take that much time
     @GET("weather")
     suspend fun fetchLocationCurrentWeather(
         @Query("appId") apiKey: String = BuildConfig.OPEN_WEATHER_API_KEY,

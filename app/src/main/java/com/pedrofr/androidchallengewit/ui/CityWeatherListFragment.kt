@@ -22,7 +22,7 @@ class CityWeatherListFragment : Fragment(R.layout.fragment_city_list) {
 
     private val binding by viewBinding(FragmentCityListBinding::bind)
     private val cityWeatherListViewModel by viewModels<CityWeatherListViewModel>()
-    private val citiesAdapter by lazy { CityListAdapter() }
+    private val citiesAdapter by lazy { CityListAdapter(::navigateToCityWeatherDetail) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -47,7 +47,6 @@ class CityWeatherListFragment : Fragment(R.layout.fragment_city_list) {
             cityWeatherListViewModel.onSearchQuery(text.toString())
         }
 
-        //TODO if time, this should go into a BaseItem for the adapter so we can have all the cards inside the RecyclerView
         binding.currentLocationCardView.setOnClickListener {
             requestPermission.launch(Manifest.permission.ACCESS_FINE_LOCATION) //ask for user permissions runtime in order to access his position and then get his current location weather
         }
@@ -69,5 +68,10 @@ class CityWeatherListFragment : Fragment(R.layout.fragment_city_list) {
                 Log.d("DEBUG", "permission denied")
             }
         }
+
+    private fun navigateToCityWeatherDetail(view: View, cityId: Long){
+        val direction = CityWeatherListFragmentDirections.cityListToWeatherDetail(cityId)
+        view.findNavController().navigate(direction)
+    }
 
 }

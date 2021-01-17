@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.observe
 import androidx.viewbinding.ViewBinding
 import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KProperty
@@ -15,7 +14,10 @@ import kotlin.reflect.KProperty
  * Use view binding with one single line
  *
  * @author Gabor Varadi
+ *
  */
+
+//Observe I always use this Extension from the author above in order to use viewbinding with one single line of code. I'm assuming I can use this for the challenge
 class FragmentViewBindingDelegate<T : ViewBinding>(
     val fragment: Fragment,
     val viewBindingFactory: (View) -> T

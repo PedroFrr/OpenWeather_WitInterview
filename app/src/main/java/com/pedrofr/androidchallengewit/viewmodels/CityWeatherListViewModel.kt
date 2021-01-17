@@ -37,7 +37,6 @@ class CityWeatherListViewModel @ViewModelInject constructor(
         }
     }
 
-    //TODO refactor see if there are other ways to do this
     private fun fetchCitiesByName(query: String): LiveData<List<City>> {
         val liveData = MutableLiveData<List<City>>()
         viewModelScope.launch {

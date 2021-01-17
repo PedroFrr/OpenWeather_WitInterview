@@ -11,7 +11,7 @@
     </style>
 
     <!-- Splash Screen Theme -->
-    <style name="AppTheme.SplashTheme">
+    <style name="SplashTheme">
         <item name="android:windowBackground">@drawable/splash_background</item>
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:windowTranslucentNavigation">true</item>
@@ -30,7 +30,7 @@
         <item name="textAllCaps">true</item>
     </style>
 
-    <style name="CityWeatherInfo" >
+    <style name="WeatherSubtitle" >
         <item name="android:textColor">@android:color/black</item>
         <item name="textAllCaps">true</item>
     </style>

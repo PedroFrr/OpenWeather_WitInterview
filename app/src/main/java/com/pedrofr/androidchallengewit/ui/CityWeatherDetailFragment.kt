@@ -18,6 +18,7 @@ import com.pedrofr.androidchallengewit.utils.*
 import com.pedrofr.androidchallengewit.viewmodels.CityWeatherDetailViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
+import kotlin.math.min
 
 @AndroidEntryPoint
 class CityWeatherDetailFragment : Fragment(R.layout.fragment_city_weather_detail) {
@@ -32,7 +33,7 @@ class CityWeatherDetailFragment : Fragment(R.layout.fragment_city_weather_detail
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        fusedLocationClient = context?.let { LocationServices.getFusedLocationProviderClient(it) }!! //TODO refactor
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
 
         initUi()
         initObservables()
@@ -40,7 +41,7 @@ class CityWeatherDetailFragment : Fragment(R.layout.fragment_city_weather_detail
 
     private fun initUi() {
         //If arguments are null it means the user clicked on current location
-        //TODO if there is time think of a better solution
+        //This solution might not be the best but I just wanted to reuse the detail layout and fragment for both actions (where users selects a specific city or by location)
         arguments?.let {
             val args = CityWeatherDetailFragmentArgs.fromBundle(it)
             val cityId = args.cityId
@@ -60,17 +61,21 @@ class CityWeatherDetailFragment : Fragment(R.layout.fragment_city_weather_detail
             when (result) {
                 is Loading -> {
                     binding.loadingProgressBar.visible()
+                    binding.errorGroup.gone()
                     binding.weatherDetailCardView.gone()
+                    binding.additionalInfo.gone()
                 }
                 is Success -> {
                     with(result.data){
                         binding.loadingProgressBar.gone()
                         binding.cityName.text = cityName
-                        binding.temperature.text = "${actualTemperature}º"//TODO refactor
+                        binding.temperature.text = getString(R.string.placeholder_temperature, actualTemperature)
                         binding.weatherDescription.text = description
-                        binding.humidityLevel.text = "${humidity}%" //TODO refactor
+                        binding.humidityLevel.text = getString(R.string.placeholder_percentage, humidity)
                         binding.currentDayOfMonth.text = timestamp.unixTimestampToDayOfMonth()
                         binding.currentDayOfWeek.text = timestamp.unixTimestampToDayOfWeek()
+                        binding.minTemperatureValue.text = getString(R.string.placeholder_temperature, minTemperature)
+                        binding.maxTemperatureValue.text = getString(R.string.placeholder_temperature, maxTemperature)
 
                         //Load image with Glide
                         Glide.with(this@CityWeatherDetailFragment)
@@ -82,11 +87,14 @@ class CityWeatherDetailFragment : Fragment(R.layout.fragment_city_weather_detail
                     }
 
                     binding.weatherDetailCardView.visible()
+                    binding.additionalInfo.visible()
 
                 }
                 is Failure -> {
-                    //TODO if there's time add icon for error
-                    toast(getString(R.string.error_info_message))
+                    binding.loadingProgressBar.gone()
+                    binding.weatherDetailCardView.gone()
+                    binding.additionalInfo.gone()
+                    binding.errorGroup.visible()
                 }
             }
 

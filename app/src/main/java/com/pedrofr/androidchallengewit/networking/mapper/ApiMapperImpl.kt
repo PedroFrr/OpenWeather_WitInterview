@@ -6,7 +6,6 @@ import javax.inject.Inject
 
 class ApiMapperImpl @Inject constructor() : ApiMapper {
 
-    //TODO refactor the List<WeatherResponse> mapping
     override fun mapApiWeatherToDomain(apiWeather: GetWeatherResponse): Weather = with(apiWeather) {
         Weather(
             main = weatherResponse.first().main,

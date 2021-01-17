@@ -6,6 +6,9 @@
     <string name="error_info_message">Something went wrong</string>
     <string name="city_image">City image</string>
     <string name="weather_icon">Weather icon</string>
-
+    <string name="max_temperature">Max temperature</string>
+    <string name="min_temperature">Min temperature</string>
+    <string name="placeholder_percentage">%1$d%%</string>
+    <string name="placeholder_temperature">%1$dº</string>
 
 </resources>

@@ -16,6 +16,7 @@ buildscript {
         navVersion = '2.3.2'
         play_services_version = '17.0.1'
         glideVersion = '4.11.0'
+        leakCanaryVersion = '2.6'
     }
     repositories {
         google()

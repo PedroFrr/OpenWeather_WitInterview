@@ -13,7 +13,6 @@ interface CityDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(cities: List<City>)
 
-    //TODO for now this is not suspend, refactor to suspend
     @Query("SELECT * FROM cities ORDER BY name")
     fun fetchCities(): Flow<List<City>>
 

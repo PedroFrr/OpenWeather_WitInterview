@@ -10,18 +10,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.pedrofr.androidchallengewit.database.model.City
 import com.pedrofr.androidchallengewit.databinding.ListItemCityBinding
 
-class CityListAdapter : ListAdapter<City, CityListAdapter.ViewHolder>(CityListDiffCallBack()) {
+class CityListAdapter(private val navigateToCityWeatherDetail: (view: View, cityId: Long) -> Unit ) : ListAdapter<City, CityListAdapter.ViewHolder>(CityListDiffCallBack()) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
-        holder.bind(item)
+        holder.bind(item, navigateToCityWeatherDetail)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder.from(parent)
     }
 
-    //TODO add view binding
     class ViewHolder private constructor(
         private val binding: ListItemCityBinding
      ) : RecyclerView.ViewHolder(binding.root){
@@ -33,21 +32,17 @@ class CityListAdapter : ListAdapter<City, CityListAdapter.ViewHolder>(CityListDi
             }
         }
 
-        //TODO maybe explore if it's need to change this reference operator here
-        fun bind(item: City){
+        fun bind(item: City,
+                 navigateToCityWeatherDetail: (view: View, cityId: Long) -> Unit){
             with(binding) {
                 cityName.text = item.name
                 cityInfo.setOnClickListener { view ->
-                    navigateCityWeatherDetail(view, item.id)
+                    navigateToCityWeatherDetail(view, item.id)
                 }
             }
 
         }
 
-        private fun navigateCityWeatherDetail(view: View, cityId: Long){
-            val direction = CityWeatherListFragmentDirections.cityListToWeatherDetail(cityId)
-            view.findNavController().navigate(direction)
-        }
     }
 }
 
