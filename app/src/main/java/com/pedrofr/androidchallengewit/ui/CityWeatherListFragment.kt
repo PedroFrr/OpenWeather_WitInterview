@@ -59,6 +59,7 @@ class CityWeatherListFragment : Fragment(R.layout.fragment_city_list) {
         }
     }
 
+    //New onActivityResult API. Easier permission management
     private val requestPermission =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
             if (isGranted) {
