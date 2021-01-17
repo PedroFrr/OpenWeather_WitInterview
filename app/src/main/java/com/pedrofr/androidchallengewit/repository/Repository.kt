@@ -3,7 +3,6 @@ package com.pedrofr.androidchallengewit.repository
 import com.pedrofr.androidchallengewit.database.model.City
 import com.pedrofr.androidchallengewit.database.model.Result
 import com.pedrofr.androidchallengewit.database.model.Weather
-import com.pedrofr.androidchallengewit.database.model.response.GetWeatherResponse
 import kotlinx.coroutines.flow.Flow
 
 interface Repository {

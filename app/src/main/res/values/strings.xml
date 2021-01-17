@@ -1,14 +1,11 @@
 <resources>
     <string name="app_name">AndroidChallengeWit</string>
-    <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
     <string name="search_cities">Search cities</string>
     <string name="current_location">Current Location</string>
     <string name="error_info_message">Something went wrong</string>
-    <string name="temperature_percentage">%1$d º</string>
-    <string name="humidity_level">%1$d %%</string>
+    <string name="city_image">City image</string>
+    <string name="weather_icon">Weather icon</string>
 
 
 </resources>

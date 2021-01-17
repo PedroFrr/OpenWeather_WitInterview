@@ -14,15 +14,9 @@ import com.pedrofr.androidchallengewit.database.model.Failure
 import com.pedrofr.androidchallengewit.database.model.Loading
 import com.pedrofr.androidchallengewit.database.model.Success
 import com.pedrofr.androidchallengewit.databinding.FragmentCityWeatherDetailBinding
-import com.pedrofr.androidchallengewit.utils.OPEN_WEATHER_ICON_URL
-import com.pedrofr.androidchallengewit.utils.viewBinding
+import com.pedrofr.androidchallengewit.utils.*
 import com.pedrofr.androidchallengewit.viewmodels.CityWeatherDetailViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import gone
-import toast
-import unixTimestampToDayOfMonth
-import unixTimestampToDayOfWeek
-import visible
 import java.util.*
 
 @AndroidEntryPoint
@@ -57,7 +51,6 @@ class CityWeatherDetailFragment : Fragment(R.layout.fragment_city_weather_detail
             }else{
                 cityWeatherDetailViewModel.fetchCityCurrentWeather(cityId)
             }
-
         }
     }
 

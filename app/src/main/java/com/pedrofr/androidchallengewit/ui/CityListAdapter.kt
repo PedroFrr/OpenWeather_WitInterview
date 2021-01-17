@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.pedrofr.androidchallengewit.database.model.City
 import com.pedrofr.androidchallengewit.databinding.ListItemCityBinding
 
-class CityListAdapter() : ListAdapter<City, CityListAdapter.ViewHolder>(CityListDiffCallBack()) {
+class CityListAdapter : ListAdapter<City, CityListAdapter.ViewHolder>(CityListDiffCallBack()) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)

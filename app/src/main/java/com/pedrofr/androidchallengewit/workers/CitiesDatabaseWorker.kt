@@ -4,13 +4,14 @@ import android.content.Context
 import android.util.Log
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
-import com.google.gson.stream.JsonReader
 import com.pedrofr.androidchallengewit.database.AppDatabase
 import com.pedrofr.androidchallengewit.database.model.City
 import com.pedrofr.androidchallengewit.utils.CITIES_DATA_JSON_FILENAME
+import com.squareup.moshi.JsonAdapter
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.Types
 
+@Suppress("BlockingMethodInNonBlockingContext")
 class CitiesDatabaseWorker(context: Context, workerParams: WorkerParameters) :
     CoroutineWorker(context, workerParams) {
 
@@ -20,28 +21,19 @@ class CitiesDatabaseWorker(context: Context, workerParams: WorkerParameters) :
 
     override suspend fun doWork(): Result {
         try {
-//            val jsonString = applicationContext.assets.readFile("file_name.json")
-//
-//            val moshi: Moshi = Moshi.Builder().build()
-//            val adapter: JsonAdapter<City> = moshi.adapter(City::class.java)
-//            val movieList: List<City> = adapter.fromJson(jsonString) //TODO see if there's a need to handle this warning
+            val jsonString = applicationContext.assets.open(CITIES_DATA_JSON_FILENAME).bufferedReader().use { it.readText() }
+            val moshi = Moshi.Builder().build()
+            val type = Types.newParameterizedType(List::class.java, City::class.java)
+            val jsonAdapter: JsonAdapter<List<City>> = moshi.adapter(type)
+            val cityList = jsonAdapter.fromJson(jsonString)
 
-//            String cardsJsonResponse = ...;
-//            Type type = Types.newParameterizedType(List.class, Card.class);
-//            JsonAdapter<List<Card>> adapter = moshi.adapter(type);
-//            List<Card> cards = adapter.fromJson(cardsJsonResponse);
+            cityList?.let{cities ->
+                val database = AppDatabase.getInstance(applicationContext)
+                database.cityDao().insertAll(cities)
+                return Result.success()
+            } ?: return Result.failure()
 
-            applicationContext.assets.open(CITIES_DATA_JSON_FILENAME).use { inputStream ->
-                JsonReader(inputStream.reader()).use { jsonReader ->
-                    val cityType = object : TypeToken<List<City>>() {}.type
-                    val cityList: List<City> = Gson().fromJson(jsonReader, cityType)
 
-                    val database = AppDatabase.getInstance(applicationContext)
-                    database.cityDao().insertAll(cityList)
-
-                    return Result.success()
-                }
-            }
         } catch (error: Exception) {
             Log.e(TAG, "Error when saving cities in database", error)
             return Result.failure()

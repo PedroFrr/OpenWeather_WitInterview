@@ -2,7 +2,6 @@ package com.pedrofr.androidchallengewit.networking.mapper
 
 import com.pedrofr.androidchallengewit.database.model.Weather
 import com.pedrofr.androidchallengewit.database.model.response.GetWeatherResponse
-import com.pedrofr.androidchallengewit.database.model.response.WeatherResponse
 import javax.inject.Inject
 
 class ApiMapperImpl @Inject constructor() : ApiMapper {
@@ -21,10 +20,6 @@ class ApiMapperImpl @Inject constructor() : ApiMapper {
             cityName = cityName,
             timestamp = timestamp
         )
-    }
-
-    private fun mapApiWeatherToDb(apiWeatherResponse: WeatherResponse) = with(apiWeatherResponse) {
-
     }
 
 }

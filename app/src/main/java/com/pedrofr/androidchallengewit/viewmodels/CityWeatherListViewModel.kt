@@ -17,7 +17,7 @@ class CityWeatherListViewModel @ViewModelInject constructor(
     private var searchJob: Job? = null
     private var _searchCitiesLiveData: LiveData<List<City>>
     fun getCitiesByName() = _searchCitiesLiveData
-    private val _searchFieldTextLiveData = MutableLiveData<String>("")
+    private val _searchFieldTextLiveData = MutableLiveData("")
 
 
     init {

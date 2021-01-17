@@ -1,8 +1,8 @@
+package com.pedrofr.androidchallengewit.utils
+
 import android.content.Context
-import android.content.pm.PackageManager
 import android.view.View
 import android.widget.Toast
-import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import java.text.SimpleDateFormat
 import java.util.*
@@ -13,13 +13,6 @@ fun Fragment.toast(message: String, length: Int = Toast.LENGTH_SHORT) {
 
 fun Context.toast(message: String, length: Int = Toast.LENGTH_SHORT) {
     Toast.makeText(this, message, length).show()
-}
-
-fun Fragment.hasPermission(permission: String): Boolean {
-    return ActivityCompat.checkSelfPermission(
-        context!!, //TODO refactor non null assertion
-        permission
-    ) == PackageManager.PERMISSION_GRANTED
 }
 
 /**

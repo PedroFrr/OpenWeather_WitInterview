@@ -36,9 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/current_location"
-            android:textColor="@android:color/black"
-            android:textSize="@dimen/city_name_text_size"
-            android:textStyle="bold"
+            style="@style/CityName"
             android:layout_marginStart="@dimen/padding_standard"/>
     </com.google.android.material.card.MaterialCardView>
 

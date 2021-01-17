@@ -64,9 +64,9 @@ class CityWeatherListFragment : Fragment(R.layout.fragment_city_list) {
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
             if (isGranted) {
                 view?.findNavController()?.navigate(R.id.cityListToWeatherDetail)
-                Log.i("DEBUG", "permission granted")
+                Log.d("DEBUG", "permission granted")
             } else {
-                Log.i("DEBUG", "permission denied")
+                Log.d("DEBUG", "permission denied")
             }
         }
 

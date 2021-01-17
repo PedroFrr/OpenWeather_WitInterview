@@ -34,4 +34,12 @@
         <item name="android:textColor">@android:color/black</item>
         <item name="textAllCaps">true</item>
     </style>
+
+    <style name="CityName" >
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">@dimen/city_name_text_size</item>
+        <item name="android:textStyle">bold</item>
+        <item name="textAllCaps">true</item>
+    </style>
+
 </resources>

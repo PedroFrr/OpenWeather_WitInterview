@@ -1,9 +1,7 @@
 package com.pedrofr.androidchallengewit.repository
 
 import com.pedrofr.androidchallengewit.database.dao.CityDao
-import com.pedrofr.androidchallengewit.database.dao.WeatherDao
 import com.pedrofr.androidchallengewit.database.model.*
-import com.pedrofr.androidchallengewit.database.model.response.GetWeatherResponse
 import com.pedrofr.androidchallengewit.networking.OpenWeatherClient
 import com.pedrofr.androidchallengewit.networking.mapper.ApiMapper
 import kotlinx.coroutines.flow.Flow
@@ -12,7 +10,6 @@ import javax.inject.Inject
 
 class RepositoryImpl @Inject constructor(
     private val cityDao: CityDao,
-    private val weatherDao: WeatherDao, //TODO see if needed, if not delete
     private val openWeatherClient: OpenWeatherClient,
     private val apiMapper: ApiMapper
 ) : Repository {
